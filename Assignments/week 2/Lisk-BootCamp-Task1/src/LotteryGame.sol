@@ -6,7 +6,7 @@ pragma solidity ^0.8.28;
  * @dev A simple number guessing game where players can win ETH prizes
  */
 contract LotteryGame {
-    address public Admin;
+    address public owner;
     struct Player {
         uint256 attempts;
         bool active;
@@ -14,11 +14,11 @@ contract LotteryGame {
 
     // TODO: Declare state variables
     // - Mapping for player information
-    mapping(address => Player) public Players;
+    mapping(address => Player) public players;
     // - Array to track player addresses
     address[] public PlayerAddress;
     // - Total prize pool
-    uint256 public totalPricePool;
+    uint256 public totalPrize;
     // - Array for winners
     address[] public winners;
     // - Array for previous winners
@@ -37,11 +37,11 @@ contract LotteryGame {
     );
 
     constructor() {
-        Admin = msg.sender;
+        owner = msg.sender;
     }
 
     modifier onlyAdmin() {
-        require(msg.sender == Admin, "Only admin can perform this action");
+        require(msg.sender == owner, "Only admin can perform this action");
         _;
     }
 
@@ -52,18 +52,15 @@ contract LotteryGame {
     function register() public payable {
         // TODO: Implement registration logic
         // - Verify correct payment amount
-        require(
-            msg.value == 0.02 ether,
-            "YOU MUST STAKE EXACTLY 0.02 ETH TO REGISTER."
-        );
+        require(msg.value == 0.02 ether, "Please stake 0.02 ETH");
         // user should only register once
-        require(!Players[msg.sender].active, "YOU CAN ONLY REGISTER ONCE.");
+        require(!players[msg.sender].active, "Player is not active");
         // - Add player to mapping
-        Players[msg.sender] = Player({attempts: 0, active: true});
+        players[msg.sender] = Player({attempts: 0, active: true});
         // - Add player address to array
         PlayerAddress.push(msg.sender);
         // - Update total prize
-        totalPricePool += msg.value;
+        totalPrize += msg.value;
         // - Emit registration event
         emit PlayerRegistered(msg.sender);
     }
@@ -76,16 +73,19 @@ contract LotteryGame {
     function guessNumber(uint8 guess) public {
         // TODO: Implement guessing logic
         // - Validate guess is between 1 and 9
-        require(guess >= 1 && guess <= 9, "YOUR GUESS IS OUT OF RANGE.");
+        require(guess > 0 && guess < 10, "Number must be between 1 and 9");
         // - Check player is registered and has attempts left
-        require(Players[msg.sender].active, "NOT REGISTERED");
-        require(Players[msg.sender].attempts <= 2, "NO MORE ATTEMPTS");
+        require(players[msg.sender].active, "Player is not active");
+        require(
+            players[msg.sender].attempts < 2,
+            "Player has already made 2 attempts"
+        );
         // - Generate "random" number
         uint256 randomNumber = _generateRandomNumber();
         // - Compare guess with random number
         bool correctGuess = randomNumber == guess;
         // - Update player attempts
-        Players[msg.sender].attempts += 1;
+        players[msg.sender].attempts += 1;
         // - Handle correct guesses
         if (correctGuess) {
             winners.push(msg.sender);
@@ -102,7 +102,8 @@ contract LotteryGame {
     function distributePrizes() public onlyAdmin {
         // TODO: Implement prize distribution logic
         // - Calculate prize amount per winner
-        uint256 pricePerPlayer = totalPricePool / winners.length;
+        require(winners.length > 0, "No winners to distribute prizes to");
+        uint256 pricePerPlayer = totalPrize / winners.length;
         // - Transfer prizes to winners
         for (uint i = 0; i < winners.length; i++) {
             // payable(winners[i]).transfer(pricePerPlayer);
