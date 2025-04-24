@@ -1,4 +1,4 @@
-# Lisk BootCamp Task 1
+# Solidity Smart Contract Assignment: LotteryGame
 
 > ## Compiling
 >
