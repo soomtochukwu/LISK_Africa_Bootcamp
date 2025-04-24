@@ -1,14 +1,14 @@
-1. Create a table showing the contrast between :-
+1. Create a table showing the contrast between:-
 
-   a. Hardhat and foundry environments both when building,compiling and deploying smart contracts
+   a. Hardhat and foundry environments, both when building, compiling, and deploying smart contracts
 
 | **Aspect**                    | **Hardhat**                                                              | **Foundry**                                                 |
 | ----------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------- |
-| **Building Smart Contracts**  | Provides a JavaScript/TypeScript-based framework for building contracts. | Focuses on speed and simplicity with Rust-based tooling.    |
-| **Compiling Smart Contracts** | Uses Solidity compiler (`solc`) with extensive configuration options.    | Uses its own fast and efficient compiler (`forge build`).   |
-| **Deploying Smart Contracts** | Supports scripting and plugins for deployment (e.g., `ethers.js`).       | Deployment is handled via `forge` with minimal boilerplate. |
+| **Building Smart Contracts**  | Hardhat uses JavaScript to scaffold a development environment. This makes things easy since most developers are JS developers | It's just good enough for advanced solidity builders.    |
+| **Compiling Smart Contracts** | It employs the Solidity compiler (`solc`), powered with JS syntax(npx), with extensive configuration options to make, making deployment simple.    | Uses its own fast and efficient compiler (`forge build`).   |
+| **Deploying Smart Contracts** | Hardhat allows developers to write highly customizable script(s) for deployment and verification.       | Foundry (Forge) is not all that flexible. |
 
-    b. Difference of building a smart contract using local IDE environments like visual studio rather than in remix
+    b. Difference of building a smart contract using local IDE environments like Visual Studio rather than in Remix
 
 | **Aspect**         | **Local IDE (e.g., Visual Studio Code)**                               | **Remix**                                              |
 | ------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------ |
