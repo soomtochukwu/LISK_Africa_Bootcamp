@@ -1,17 +1,27 @@
 # Lisk BootCamp Task 1
 
-# Project Images
-
-> ## Compilation Success
+> ## Compiling
+>
+> ```bash
+> ~$ forge build
+> ```
 >
 > <img src="./jpegs/compiled-successfully.png" alt="Image showing successful compilation" />
+> <br>
+> Compilation Success
 
 <br>
 <br>
 
-> ## 100% Test Score
+> ## Component Testing
+>
+> ```bash
+> ~$ forge test
+> ```
 >
 > <img src="./jpegs/all-test-passed.png" alt="Image showing 100% test score" />
+> <br>
+> 100% Test Score
 
 <br>
 <br>
