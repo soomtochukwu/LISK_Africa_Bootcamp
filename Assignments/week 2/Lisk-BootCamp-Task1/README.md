@@ -16,7 +16,7 @@
 <br>
 <br>
 
-> ## I also added an event to indicate when a user makes a correct guess
+> ## I also added a custom event to indicate when a user makes a correct guess
 >
 > <img src="./jpegs/event.png" alt="..." />
 > <img src="./jpegs/emitEvent.png" alt="..." />
