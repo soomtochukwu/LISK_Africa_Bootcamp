@@ -20,10 +20,10 @@ contract VotingSystem is Ownable {
         uint voteCount;
     }
 
-    mapping(uint => Candidate) public candidates;
-    mapping(address => bool) public hasVoted;
+    mapping(uint => Candidate) private candidates;
+    // mapping(uint => Candidate) private candidates is private because there is a function to get candidate
 
-    mapping(address => bool) voters;
+    mapping(address => bool) public voters;
 
     constructor() {
         // this is where I initialized the owner variable that was inherited form the base contract
@@ -42,8 +42,10 @@ contract VotingSystem is Ownable {
     }
 
     function vote(uint candidateId) public {
-        require(!voters[msg.sender], "YOU CAN ONLY VOTE ONCE!!");
+        require(!(voters[msg.sender]), "YOU CAN ONLY VOTE ONCE !!!");
+        require(candidates[candidateId].id > 0, "INVALID ID !!!");
         candidates[candidateId].voteCount += 1;
+        voters[msg.sender] = true ;
     }
 
     function getCandidate(

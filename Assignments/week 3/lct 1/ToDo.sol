@@ -30,6 +30,8 @@ contract TodoList {
             status: Status.Pending
         });
 
+        todoIds.push(idCounter);
+
         emit TodoAdded(idCounter, _content);
         // I would increment the counter each time i add a Todo task.
         idCounter += 1;

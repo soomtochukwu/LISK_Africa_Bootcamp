@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Assignments/week 3/lct 2/contracts/VotingSystem.sol": "Ownable"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Assignments/week 3/lct 2/contracts/VotingSystem.sol": {
+			"keccak256": "0x27e1477e25a26a3ba808a6d83a726df53bb372c100fd71965942494f6e2add14",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://8b278f9e5f14f793881579d6a5c9e2907183b1ad31e0e38f5abfc57c10bb8f20",
+				"dweb:/ipfs/Qmdx5CumSEpRpbadCQU4ezPgdCjAXxobe3fgLEYqUEj1JA"
+			]
+		}
+	},
+	"version": 1
+}
