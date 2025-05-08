@@ -1,0 +1,77 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "EtherVaultAddress",
+						"type": "address"
+					}
+				],
+				"name": "destroyEtherVault",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Assignments/week 4/lect 1/EtherVaultInteraction/destroyEtherVault.sol": "SelfDestruct_byMazi"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Assignments/week 4/lect 1/EtherVaultInteraction/destroyEtherVault.sol": {
+			"keccak256": "0xa0ad70fa90ed958d4f1a5822a2ee3a781b91a079a4214ed4e369d4ca3e68c7ed",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e3f5185ff960f899cff5542931747e35f5e5710699f4b9e197a52fbb92f7a446",
+				"dweb:/ipfs/QmVacCYkX7xEEHCjztjDDyT48uEKMQpnzFq2dogfeUTt26"
+			]
+		}
+	},
+	"version": 1
+}
