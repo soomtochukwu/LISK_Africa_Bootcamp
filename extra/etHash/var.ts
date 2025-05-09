@@ -47,3 +47,20 @@ export const words = [
   "Education",
   "Workshops",
 ] as const;
+
+export const ABI = [
+  {
+    inputs: [],
+    name: "lastWithdrawalTime",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];

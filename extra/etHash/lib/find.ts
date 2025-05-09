@@ -5,7 +5,7 @@ import {
   encodeBase64,
   solidityPacked,
 } from "ethers";
-import { words } from "./var";
+import { words } from "../var";
 
 const MAGIC_WORD_HASH: string =
   "0xe12a28df6f8731c94ade6605c8f457c16b3f591ecc3be3d092af1f56215a3da2";
