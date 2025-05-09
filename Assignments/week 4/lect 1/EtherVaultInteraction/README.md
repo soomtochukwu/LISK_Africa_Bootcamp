@@ -4,4 +4,4 @@
 > [0x8a371e00cd51E2BE005B86EF73C5Ee9Ef6d23FeB](https://sepolia-blockscout.lisk.com/address/0x8a371e00cd51E2BE005B86EF73C5Ee9Ef6d23FeB)
 
 >  ## My deployed contract address
-> [0x1AaB43DB60Afef46F857b009F6B13788dc4C0735](https://sepolia-blockscout.lisk.com/address/0x1AaB43DB60Afef46F857b009F6B13788dc4C0735?tab=index)
+> [0x1298413aB24aaa0AEd469912b1dCEea43EfD5667](https://sepolia-blockscout.lisk.com/address/0x1298413aB24aaa0AEd469912b1dCEea43EfD5667?tab=contract)
