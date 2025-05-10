@@ -12,54 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.heist = exports.listen = void 0;
-exports.withdraw = withdraw;
+exports.listen = void 0;
 const ethers_1 = require("ethers");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const var_1 = require("./var");
 const //
 PRIVATE_KEY = process.env.PRIVATE_KEY, CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS, RPC_URL = process.env.RPC_URL;
-function withdraw() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const //
-        provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), wallet = new ethers_1.ethers.Wallet(PRIVATE_KEY, provider), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, wallet);
-        console.log(`heisting ETH :): ${wallet.address}`);
-        try {
-            console.log(`
-      Current balance`, Number(yield provider.getBalance(yield wallet.getAddress())) / 1e18, `ETH`);
-            const tx = yield contract.withdraw();
-            console.log("Transaction sent:", yield tx.hash);
-            const receipt = yield tx.wait();
-            console.log("Transaction mined in block:", receipt.blockNumber);
-            console.log(`
-      New balance`, Number(yield provider.getBalance(yield wallet.getAddress())) / 1e18, `ETH`);
-            (0, exports.listen)();
-        }
-        catch (err) {
-            // @ts-ignore
-            console.error(err.shortMessage);
-            (0, exports.listen)();
-        }
-    });
-}
 const listen = () => __awaiter(void 0, void 0, void 0, function* () {
-    // const //
-    // provider = new ethers.JsonRpcProvider(RPC_URL),
-    // contract = new ethers.Contract(CONTRACT_ADDRESS as string, ABI, provider);
+    const //
+    provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), wallet = new ethers_1.ethers.Wallet(PRIVATE_KEY, provider), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, wallet);
     // await contract.on("Withdrawn", async (address, amount) => {
     //   console.log(">>", address, "withdrew", amount);
     //   console.log(">> heisting now");
     // });
     console.log("<< retrying in 5 sec");
-    setTimeout(() => {
-        withdraw();
-    }, 1000 * 5);
+    console.log(yield contract.lastWithdrawer());
 });
 exports.listen = listen;
-const heist = () => __awaiter(void 0, void 0, void 0, function* () {
-    console.clear();
-    withdraw();
-});
-exports.heist = heist;
-(0, exports.heist)();
+(0, exports.listen)();
