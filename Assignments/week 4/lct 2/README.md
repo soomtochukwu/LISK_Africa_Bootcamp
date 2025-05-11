@@ -1,41 +1,87 @@
-> # Week 4 – Lecture 2 Assignment
+> # 📄 Escrow Smart Contract Documentation
 
-> **Title:** Escrow Smart Contract?  
-> **Assignment:** Using a simple escrow smart contract, write mocks for unit tests and Fuzz testing of the smart contract.
-> **Instruction(s):**Submit a github repo of your smart contract and test files
-
----
-
-## 🧠 What Is an Escrow?
-
-In traditional finance, an **escrow** is a legal arrangement where a third party, known as an **arbiter** temporarily holds funds or assets on behalf of two other parties involved in a transaction. The third party only releases the assets once all predefined conditions are met. Escrow is often used in real estate, freelancing, marketplaces, and more to build trust between parties who may not fully know each other.
+**Assignment:** Using a simple escrow smart contract, write mocks for unit tests and Fuzz testing of the smart contract. <br>
+**Instruction(s):** Submit a github repo of your smart contract and test files  
+**Author:** MaziOfW3b
 
 ---
 
-## 💡 What Is an Escrow Smart Contract?
+## 🧠 Overview
 
-An **escrow smart contract** is a blockchain-based version of a traditional escrow system. It replaces the need for a centralized third party by using **smart contract logic** on the blockchain to securely hold and release funds based on certain predefined rules or conditions.
-
-This contract is typically written in Solidity (for Ethereum) and can:
-
-- Accept funds from a payer (e.g., a buyer or client).
-- Lock those funds securely on-chain.
-- Release the funds to the payee (e.g., a seller or freelancer) **only** when both parties agree or when conditions (such as delivery confirmation) are met.
-- Optionally return the funds if the terms are violated or the deal fails.
+This smart contract represents a unique form of **escrow protocol** tailored to a contract-based asset sale. It facilitates secure peer-to-peer transfers of ownership using Ethereum, under the supervision of an **arbiter**. The contract manages ownership, buyer interest, price enforcement, and secure fund release or refund.
 
 ---
 
-## 🎯 Why Use Escrow Smart Contracts?
+## 🔐 Roles
 
-- **Trustless Transactions**: No need to trust a centralized escrow service.
-- **Transparency**: All logic is visible and verifiable on the blockchain.
-- **Automation**: Reduces the risk of fraud or disputes, as execution is automatic.
-- **Low Cost**: No middleman fees except gas costs.
+- **Owner:** The current holder of the contract/asset (initially the contract deployer).
+- **Buyer:** A new user interested in purchasing the asset.
+- **Arbiter:** A trusted third party responsible for releasing or refunding funds.
+
+---
+
+## 💵 Workflow
+
+### 1. **Deployment**
+
+- The contract is deployed by the `owner`, who also sets the `arbiter`.
+
+### 2. **Buyer Interaction**
+
+- A user (not owner or arbiter) sends **exactly 0.003 ETH** via `buyTheContractFor0_003ETH()` to signal intent to buy.
+- Buyer’s address is recorded and funds are held in escrow.
+- Buyer can confirm or cancel their interest using `stillInterested()` or `noLongerInterested()`.
+
+### 3. **Ownership Transfer**
+
+- The current `owner` calls `sellEscrowContract()`, which:
+  - Checks if the buyer still has interest.
+  - Transfers ownership to the buyer.
+  - Stores the previous owner.
+
+### 4. **Escrow Completion**
+
+- If all conditions are met, the **arbiter** can:
+  - Call `releaseFunds()` → funds go to `prevOwner` (old owner).
+  - Call `refundBuyer()` → funds go back to `buyer` if interest is canceled.
 
 ---
 
-## 💼 Example Use Case
+## 🔐 Access Control
 
-A freelance marketplace where clients deposit funds into an escrow smart contract. The freelancer completes the job. If the client confirms the work is done, the contract releases the payment. If there’s a dispute, the smart contract can involve an arbitrator or refund the client depending on the outcome.
+| Function               | Access       | Description                           |
+| ---------------------- | ------------ | ------------------------------------- |
+| `buyTheContract...()`  | Buyer only   | Pays 0.003 ETH and sets buyer address |
+| `stillInterested()`    | Buyer only   | Marks interest = true                 |
+| `noLongerInterested()` | Buyer only   | Marks interest = false                |
+| `setPrice()`           | Owner only   | Updates the asking price              |
+| `sellEscrowContract()` | Owner only   | Transfers ownership to buyer          |
+| `releaseFunds()`       | Arbiter only | Sends escrow to prevOwner             |
+| `refundBuyer()`        | Arbiter only | Refunds buyer if they lost interest   |
 
 ---
+
+## 💡 Key Variables
+
+- `owner`: current contract owner.
+- `prevOwner`: former owner who should receive funds.
+- `buyer`: current interested party.
+- `arbiter`: trusted third-party.
+- `price`: cost of the contract (fixed at 0.003 ETH).
+- `interest`: true/false indicator for buyer's intent.
+- `isFunded`: true if buyer has sent funds.
+- `isReleased`: true if funds have been released.
+
+---
+
+## 📌 Notes
+
+- Buyers **must** be different from both owner and arbiter.
+- Funds are only released if buyer's interest remains true.
+- The arbiter acts as a safeguard for fair execution.
+
+---
+
+## ✅ Summary
+
+This escrow smart contract mimics a digital asset sale where the current owner sells the contract to an interested buyer. The logic ensures funds are only released after all conditions are met, with a neutral arbiter mediating the transfer. It's a simplified but practical exercise in understanding conditional fund locking and role-based smart contract design in Web3.
