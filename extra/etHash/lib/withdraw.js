@@ -25,15 +25,19 @@ function withdraw() {
         const //
         provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), wallet = new ethers_1.ethers.Wallet(PRIVATE_KEY, provider), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, wallet);
         console.log(`heisting ETH :): ${wallet.address}`);
+        console.clear();
         try {
-            console.log(`
+            console.log(`...starting new heist
       Current balance`, Number(yield provider.getBalance(yield wallet.getAddress())) / 1e18, `ETH`);
             const tx = yield contract.withdraw();
-            console.log("Transaction sent:", yield tx.hash);
+            console.log(">> Transaction sent:", yield tx.hash);
             const receipt = yield tx.wait();
-            console.log("Transaction mined in block:", receipt.blockNumber);
+            console.log(">> Transaction mined in block:", receipt.blockNumber);
             console.log(`
       New balance`, Number(yield provider.getBalance(yield wallet.getAddress())) / 1e18, `ETH`);
+            console.log(`
+      Last heist: ${new Date(Date.now()).toLocaleString()}
+    `);
             (0, exports.listen)();
         }
         catch (err) {
@@ -44,22 +48,18 @@ function withdraw() {
     });
 }
 const listen = () => __awaiter(void 0, void 0, void 0, function* () {
-    // const //
-    // provider = new ethers.JsonRpcProvider(RPC_URL),
-    // contract = new ethers.Contract(CONTRACT_ADDRESS as string, ABI, provider);
-    // await contract.on("Withdrawn", async (address, amount) => {
-    //   console.log(">>", address, "withdrew", amount);
-    //   console.log(">> heisting now");
-    // });
-    console.log("<< retrying in 5 sec");
-    setTimeout(() => {
-        withdraw();
-    }, 1000 * 5);
+    const //
+    provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, provider);
+    String(yield contract.lastWithdrawer()) !==
+        "0x8a371e00cd51E2BE005B86EF73C5Ee9Ef6d23FeB"
+        ? withdraw()
+        : (0, exports.listen)();
 });
 exports.listen = listen;
 const heist = () => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();
-    withdraw();
+    console.log("...Monitoring last withdrawal." );
+    (0, exports.listen)();
 });
 exports.heist = heist;
 (0, exports.heist)();

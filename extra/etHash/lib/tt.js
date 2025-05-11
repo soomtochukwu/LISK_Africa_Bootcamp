@@ -21,7 +21,7 @@ const //
 PRIVATE_KEY = process.env.PRIVATE_KEY, CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS, RPC_URL = process.env.RPC_URL;
 const listen = () => __awaiter(void 0, void 0, void 0, function* () {
     const //
-    provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), wallet = new ethers_1.ethers.Wallet(PRIVATE_KEY, provider), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, wallet);
+    provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, provider);
     // await contract.on("Withdrawn", async (address, amount) => {
     //   console.log(">>", address, "withdrew", amount);
     //   console.log(">> heisting now");
