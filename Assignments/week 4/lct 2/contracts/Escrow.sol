@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.4;
+pragma solidity ^0.8.28;
 
 contract Escrow {
     // address public seller;
