@@ -9,17 +9,14 @@ contract Escrow {
     bool public isFunded;
     bool public isReleased;
 
+    bool public interest;
+
     address public owner;
     address public prevOwner;
 
-    constructor(address _arbiter) payable {
+    constructor(address _arbiter) {
         owner = msg.sender;
-        // seller = msg.sender;
-        // buyer = _buyer;
         arbiter = _arbiter;
-        price = msg.value;
-        isFunded = true;
-        isReleased = false;
     }
 
     modifier onlyArbiter() {
@@ -33,13 +30,28 @@ contract Escrow {
     }
 
     function buyTheContractFor0_003ETH() public payable {
+        if ((msg.sender == owner) && (msg.sender == arbiter)) {
+            payable(msg.sender).transfer(msg.value);            
+        }
         require(
             (msg.sender != owner) && (msg.sender != arbiter),
             "Only a buyer can perform this action!!!"
         );
+        require(msg.sender != buyer, "You cannot buy more than once in a roll!!");
         require(msg.value == 0.003 * 1e18 wei, "0.003 ETH is required!!!");
         price = msg.value;
+        isFunded = true;
         buyer = msg.sender;
+        interest = true;
+    }
+
+    function stillInterested ()  public {
+        require(msg.sender == buyer, "Only buyer can change interest");
+        interest = true;
+    }
+    function noLongerInterested ()  public {
+        require(msg.sender == buyer, "Only buyer can change interest");
+        interest = false;
     }
 
     // this allows the owner to reset thr price of the smart contract
@@ -49,6 +61,7 @@ contract Escrow {
 
     function sellEscrowContract() public onlyOwner {
         require(price == 0.003 * 1e18 wei, "0.003 ETH is required!!!");
+        require(interest, "Buyer is no longer interested.");
         prevOwner = owner;
         owner = buyer;
     }
@@ -56,19 +69,20 @@ contract Escrow {
     function releaseFunds() external onlyArbiter {
         require(isFunded, "No funds to release");
         require(!isReleased, "Funds already released");
+        require(interest, "Buyer is no longer interested.");
 
         // this is to confirm that the previous owner has passed ownership to the last buyer
         require(owner == buyer, "Contract is yet to be sold.");
 
-        isReleased = true;
+        isFunded = false;
         payable(prevOwner).transfer(price);
     }
 
     function refundBuyer() external onlyArbiter {
         require(isFunded, "No funds to refund");
-        require(!isReleased, "Funds already released");
+        require(!interest, "Buyer is still interested.");
 
-        isReleased = true;
+        isFunded = false;
         payable(buyer).transfer(price);
     }
 
