@@ -27,6 +27,10 @@ function withdraw() {
         console.log(`heisting ETH :): ${wallet.address}`);
         console.clear();
         try {
+            (Number(yield provider.getBalance(CONTRACT_ADDRESS)) / 1e18) < 0.003 ? () => { return "no more ETH to heist."; } : null;
+            console.log(`
+      Last withdrawer: ${String(yield contract.lastWithdrawer())}
+    `);
             console.log(`...starting new heist
       Current balance`, Number(yield provider.getBalance(yield wallet.getAddress())) / 1e18, `ETH`);
             const tx = yield contract.withdraw();
@@ -38,6 +42,9 @@ function withdraw() {
             console.log(`
       Last heist: ${new Date(Date.now()).toLocaleString()}
     `);
+            console.log(`
+      ETH remaining in EtherVault: ${String(Number(yield provider.getBalance(CONTRACT_ADDRESS)) / 1e18)} ETH
+    `);
             (0, exports.listen)();
         }
         catch (err) {
@@ -48,17 +55,24 @@ function withdraw() {
     });
 }
 const listen = () => __awaiter(void 0, void 0, void 0, function* () {
-    const //
-    provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, provider);
-    String(yield contract.lastWithdrawer()) !==
-        "0x8a371e00cd51E2BE005B86EF73C5Ee9Ef6d23FeB"
-        ? withdraw()
-        : (0, exports.listen)();
+    try {
+        const //
+        provider = new ethers_1.ethers.JsonRpcProvider(RPC_URL), contract = new ethers_1.ethers.Contract(CONTRACT_ADDRESS, var_1.ABI, provider);
+        String(yield contract.lastWithdrawer()) !==
+            "0x8a371e00cd51E2BE005B86EF73C5Ee9Ef6d23FeB"
+            ? withdraw()
+            : (0, exports.listen)();
+    }
+    catch (err) {
+        // @ts-ignore
+        console.error(err.shortMessage);
+        (0, exports.listen)();
+    }
 });
 exports.listen = listen;
 const heist = () => __awaiter(void 0, void 0, void 0, function* () {
     console.clear();
-    console.log("...Monitoring last withdrawal." );
+    console.log("...Monitoring last withdrawal.");
     (0, exports.listen)();
 });
 exports.heist = heist;

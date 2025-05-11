@@ -14,6 +14,12 @@ export async function withdraw() {
   console.log(`heisting ETH :): ${wallet.address}`);
   console.clear();
   try {
+   ( Number(await provider.getBalance(CONTRACT_ADDRESS as string)) / 1e18) < 0.003 ?() => { return "no more ETH to heist."} : null;
+    console.log(
+      `
+      Last withdrawer: ${String(await contract.lastWithdrawer())}
+    `
+    );
     console.log(
       `...starting new heist
       Current balance`,
@@ -32,9 +38,15 @@ export async function withdraw() {
     );
     console.log(
       `
-      Last heist: ${new Date(Date.now()).toUTCString()}
+      Last heist: ${new Date(Date.now()).toLocaleString()}
     `
     );
+    console.log(
+      `
+      ETH remaining in EtherVault: ${String(Number(await provider.getBalance(CONTRACT_ADDRESS as string))/1e18)} ETH
+    `
+    );
+    
     listen();
   } catch (err) {
     // @ts-ignore
@@ -43,13 +55,20 @@ export async function withdraw() {
   }
 }
 export const listen = async () => {
-  const //
+  try{
+    const //
     provider = new ethers.JsonRpcProvider(RPC_URL),
     contract = new ethers.Contract(CONTRACT_ADDRESS as string, ABI, provider);
   String(await contract.lastWithdrawer()) !==
   "0x8a371e00cd51E2BE005B86EF73C5Ee9Ef6d23FeB"
     ? withdraw()
     : listen();
+  }catch(err) {
+    // @ts-ignore
+    console.error(err.shortMessage);
+    listen();
+  }
+  
 };
 export const heist = async () => {
   console.clear();
