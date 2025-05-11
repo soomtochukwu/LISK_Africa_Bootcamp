@@ -5,7 +5,7 @@ contract Escrow {
     // address public seller;
     address public buyer;
     address public arbiter;
-    uint256 public amount;
+    uint256 public price;
     bool public isFunded;
     bool public isReleased;
 
@@ -17,35 +17,38 @@ contract Escrow {
         // seller = msg.sender;
         // buyer = _buyer;
         arbiter = _arbiter;
-        // amount = msg.value;
+        price = msg.value;
         isFunded = true;
         isReleased = false;
     }
 
     modifier onlyArbiter() {
-        require(
-            (msg.sender == arbiter) || (msg.sender == owner),
-            "Only arbiter can release funds"
-        );
+        require(msg.sender == arbiter, "Only arbiter can release funds");
+        _;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the current owner sell.");
         _;
     }
 
     function buyTheContractFor0_003ETH() public payable {
         require(
-            (msg.sender != owner) || (msg.sender != arbiter),
+            (msg.sender != owner) && (msg.sender != arbiter),
             "Only a buyer can perform this action!!!"
         );
         require(msg.value == 0.003 * 1e18 wei, "0.003 ETH is required!!!");
-        amount = msg.value;
+        price = msg.value;
         buyer = msg.sender;
     }
 
-    function sellEscrowContract() public onlyArbiter {
-        require(
-            msg.sender == owner,
-            "Only The Owner can Sell The Smart Contract."
-        );
-        require(amount == 0.003 * 1e18 wei, "0.003 ETH is required!!!");
+    // this allows the owner to reset thr price of the smart contract
+    function setPrice(uint256 _price) public onlyOwner {
+        price = _price;
+    }
+
+    function sellEscrowContract() public onlyOwner {
+        require(price == 0.003 * 1e18 wei, "0.003 ETH is required!!!");
         prevOwner = owner;
         owner = buyer;
     }
@@ -58,7 +61,7 @@ contract Escrow {
         require(owner == buyer, "Contract is yet to be sold.");
 
         isReleased = true;
-        payable(prevOwner).transfer(amount);
+        payable(prevOwner).transfer(price);
     }
 
     function refundBuyer() external onlyArbiter {
@@ -66,7 +69,7 @@ contract Escrow {
         require(!isReleased, "Funds already released");
 
         isReleased = true;
-        payable(buyer).transfer(amount);
+        payable(buyer).transfer(price);
     }
 
     function getBalance() external view returns (uint256) {
