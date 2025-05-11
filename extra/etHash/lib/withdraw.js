@@ -40,7 +40,7 @@ function withdraw() {
             console.log(`
       New balance`, Number(yield provider.getBalance(yield wallet.getAddress())) / 1e18, `ETH`);
             console.log(`
-      Last heist: ${new Date(Date.now()).toLocaleString()}
+      Last heist: ${new Date(Date.now()).toUTCString()}
     `);
             console.log(`
       ETH remaining in EtherVault: ${String(Number(yield provider.getBalance(CONTRACT_ADDRESS)) / 1e18)} ETH
