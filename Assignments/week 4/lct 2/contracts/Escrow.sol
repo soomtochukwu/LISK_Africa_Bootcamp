@@ -12,7 +12,7 @@ contract Escrow {
     address public owner;
     address public prevOwner;
 
-    constructor(address _arbiter) {
+    constructor(address _arbiter) payable {
         owner = msg.sender;
         // seller = msg.sender;
         // buyer = _buyer;
