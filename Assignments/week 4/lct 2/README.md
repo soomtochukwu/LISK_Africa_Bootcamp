@@ -1,4 +1,4 @@
-> # 📄 Escrow Smart Contract Documentation
+> # 📄 My Escrow Smart Contract Documentation
 
 **Assignment:** Using a simple escrow smart contract, write mocks for unit tests and Fuzz testing of the smart contract. <br>
 **Instruction(s):** Submit a github repo of your smart contract and test files  
