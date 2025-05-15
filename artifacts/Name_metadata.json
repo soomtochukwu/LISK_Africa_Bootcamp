@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"proxy.sol": "Name"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"proxy.sol": {
+			"keccak256": "0x606a2eec9abb35f0513d7e38e916439a6aae32c16f6bdf06fe5979ca60ad2cb2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1f33ef482532ddc68b1bb7bd4a73b08287d3077effa9701f0e90def7ee150cae",
+				"dweb:/ipfs/QmSEbueGpNydW26YbqKkA28gEEpnD2HfqUeKWmy3TJ6frL"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "get_calc",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"proxy.sol": "impl2"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"proxy.sol": {
+			"keccak256": "0x8d40634ce8df84ef7a832b966f943c4a3826207c13226901f4279ba367f3198e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://208af5cec0502d1ff2a2077b8e7115cef2c2c73e25ca23a85e1486b3cfdc3595",
+				"dweb:/ipfs/QmSTuC7cm1U48Pmit7Pybp7TSbZu8XdBRwPJxtpZhuz2td"
+			]
+		}
+	},
+	"version": 1
+}
