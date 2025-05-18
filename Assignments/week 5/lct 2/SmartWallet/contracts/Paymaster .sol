@@ -3,6 +3,19 @@ pragma solidity ^0.8.0;
 
 import "./SmartWallet.sol";
 
+interface IERC20 {
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) external returns (bool);
+
+    function transfer(
+        address recipient,
+        uint256 amount
+    ) external returns (bool);
+}
+
 /// @title Paymaster accepting ERC20 to sponsor gas
 contract Paymaster {
     IERC20 public token;
