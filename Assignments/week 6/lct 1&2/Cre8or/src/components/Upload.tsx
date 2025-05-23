@@ -23,6 +23,7 @@ const Upload = ({ reset, uploaded, setUploaded }: UploadProps) => {
         reader.readAsDataURL(uploadedFile);
       } else {
         alert("please make sure you upload an image");
+        setUploaded(false);
       }
       setBgDrag("");
     },

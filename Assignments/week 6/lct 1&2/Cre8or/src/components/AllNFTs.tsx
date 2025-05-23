@@ -10,7 +10,7 @@ const AllNFTs = () => {
         {/* heading */}
         <div className="flex space-x-4">
           <Grid color={accentColor} />
-          <span className="font-bold text-xl">All Art NFTs</span>
+          <span className="font-bold text-xl">ArtNFT (All Art NFTs)</span>
         </div>
         {/* section description */}
         <div className={dim + " text-sm "}>
