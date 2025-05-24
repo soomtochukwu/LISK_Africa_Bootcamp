@@ -31,8 +31,9 @@ contract ArtNFT is ERC721, ERC721URIStorage, Ownable {
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
         require(_creatorToken != address(0), "CreatorToken address not set");
-        ICreatorToken(_creatorToken).rewardCreator(msg.sender, 26 * 1e18); // Since the tutor did not specify the amount of tokens to reward creators with,
+        // Since the tutor did not specify the amount of tokens to reward creators with,
         // I am choosing 26 CT_AN because this assignment will be due on the 26th
+        ICreatorToken(_creatorToken).rewardCreator(msg.sender, 26 * 1e18);
         emit newArt(msg.sender, tokenId, uri);
         return tokenId;
     }
