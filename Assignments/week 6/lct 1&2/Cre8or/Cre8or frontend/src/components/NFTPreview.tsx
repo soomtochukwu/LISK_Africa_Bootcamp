@@ -17,9 +17,9 @@ const NFTPreview = ({
     [imageUrl, setImageUrl] = useState<string | null>(null),
     [error, setError] = useState<string | null>(null),
     gateways = [
-      //   "https://cloudflare-ipfs.com/ipfs/",
+      "https://cloudflare-ipfs.com/ipfs/",
       "https://gateway.pinata.cloud/ipfs/",
-      //   "https://ipfs.io/ipfs/",
+      "https://ipfs.io/ipfs/",
     ];
 
   const tryGateways = async (cid: string) => {

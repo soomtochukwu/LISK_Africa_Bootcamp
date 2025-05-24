@@ -21,9 +21,9 @@ const Card = ({ creator, id, metadataCid }: CardProps) => {
   useEffect(() => {
     const //
       gateways = [
-        // "https://cloudflare-ipfs.com/ipfs/",
+        "https://cloudflare-ipfs.com/ipfs/",
         "https://gateway.pinata.cloud/ipfs/",
-        // "https://ipfs.io/ipfs/",
+        "https://ipfs.io/ipfs/",
       ],
       tryGateways = async (cid: string) => {
         for (const g of gateways) {
