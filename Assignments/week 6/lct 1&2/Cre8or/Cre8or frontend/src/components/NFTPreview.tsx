@@ -83,7 +83,7 @@ const NFTPreview = ({
       key={metadataCid}
       src={imageUrl}
       alt={alt}
-      className="hover:brightness-125 brightness-75"
+      className="hover:brightness-125 h-full brightness-75"
     />
   );
 };
