@@ -1,9 +1,9 @@
-export const accentColor: string = " #0065a0  " as const;
+export const accentColor: string = "#0065a0" as const;
 export const dim = "text-gray-500 dark:text-gray-400" as const;
 export const ArtNFTAddress =
-  "0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f" as const;
+  "0x779AAD155d53890D11a103340b248F1d25b55831" as const;
 export const CreatorTokenAddress =
-  "0xB581C9264f59BF0289fA76D61B2D0746dCE3C30D" as const;
+  "0x9E54C0397C7FE2324E18D4A6fbfb9F8607b622C7" as const;
 
 export const ArtNFTAbi = [
   {
@@ -325,6 +325,36 @@ export const ArtNFTAbi = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllMetadata",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "uri",
+            type: "string",
+          },
+          {
+            internalType: "address",
+            name: "creator",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct ArtNFT.metadata[]",
+        name: "",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",

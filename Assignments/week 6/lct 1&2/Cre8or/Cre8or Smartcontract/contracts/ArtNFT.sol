@@ -14,6 +14,13 @@ contract ArtNFT is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
     address private _creatorToken;
 
+    struct metadata {
+        string uri;
+        address creator;
+        uint256 tokenId;
+    }
+    metadata[] private allMetadata;
+
     // I am using this specific event name because the tutor did not specify a name for the event
     // and I am choosing to use a name that is descriptive of the event
     event newArt(address indexed creator, uint256 tokenId, string uri);
@@ -30,12 +37,18 @@ contract ArtNFT is ERC721, ERC721URIStorage, Ownable {
         uint256 tokenId = _nextTokenId++;
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
+        allMetadata.push(metadata(uri, msg.sender, tokenId));
+        // Reward the creator with tokens for creating the NFT
         require(_creatorToken != address(0), "CreatorToken address not set");
         // Since the tutor did not specify the amount of tokens to reward creators with,
         // I am choosing 26 CT_AN because this assignment will be due on the 26th
         ICreatorToken(_creatorToken).rewardCreator(msg.sender, 26 * 1e18);
         emit newArt(msg.sender, tokenId, uri);
         return tokenId;
+    }
+
+    function getAllMetadata() public view returns (metadata[] memory) {
+        return allMetadata;
     }
 
     // The following functions are overrides required by Solidity.

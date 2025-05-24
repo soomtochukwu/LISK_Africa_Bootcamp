@@ -6,14 +6,17 @@ interface UploadProps {
   reset: () => void;
   uploaded: boolean;
   setUploaded: (boolean: boolean) => void;
+  setImage: (file: File) => void;
 }
 
-const Upload = ({ reset, uploaded, setUploaded }: UploadProps) => {
+const Upload = ({ reset, uploaded, setUploaded, setImage }: UploadProps) => {
   const //
+
     previewImage = async (uploadedFile: File) => {
       setUploaded(true);
       // setFile(e.dataTransfer.files[0]);
       console.log(uploadedFile?.name);
+      console.log(uploadedFile?.type);
       const reader = new FileReader();
       if (uploadedFile?.type.startsWith("image")) {
         reader.onload = (ev) => {
@@ -42,6 +45,7 @@ const Upload = ({ reset, uploaded, setUploaded }: UploadProps) => {
       onDrop={(e) => {
         e.preventDefault();
         previewImage(e.dataTransfer.files[0]);
+        setImage(e.dataTransfer.files[0]);
       }}
       className={
         "  flex active:scale-95 w-full md:w-96  cursor-pointer justify-between space-y-2 "
@@ -54,7 +58,10 @@ const Upload = ({ reset, uploaded, setUploaded }: UploadProps) => {
         onInput={(e) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          previewImage(e.currentTarget.files[0]);
+          if (e.currentTarget.files && e.currentTarget.files[0]) {
+            previewImage(e.currentTarget.files[0]);
+            setImage(e.currentTarget.files[0]);
+          }
         }}
       />
 
