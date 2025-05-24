@@ -1,3 +1,4 @@
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { FaWallet } from "react-icons/fa";
 
 const Header = () => {
@@ -8,7 +9,7 @@ const Header = () => {
         <span className="text-2xl font-bold">Creator Rewards dApp</span>
       </a>
       <button className=" flex items-center space-x-2 p-3">
-        <FaWallet /> <span>Connect Wallet</span>
+        <FaWallet size={25} /> <ConnectButton />
       </button>
     </div>
   );
