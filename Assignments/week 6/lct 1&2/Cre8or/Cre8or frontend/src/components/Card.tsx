@@ -24,6 +24,10 @@ const Card = ({ creator, id, metadataCid }: CardProps) => {
         "https://cloudflare-ipfs.com/ipfs/",
         "https://gateway.pinata.cloud/ipfs/",
         "https://ipfs.io/ipfs/",
+
+        "https://cloudflare-ipfs.com/ipfs/",
+        "https://nftstorage.link/ipfs/",
+        "https://dweb.link/ipfs/",
       ],
       tryGateways = async (cid: string) => {
         for (const g of gateways) {
