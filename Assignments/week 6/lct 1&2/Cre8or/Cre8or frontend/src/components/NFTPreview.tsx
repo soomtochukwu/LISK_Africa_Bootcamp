@@ -17,6 +17,8 @@ const NFTPreview = ({
     [imageUrl, setImageUrl] = useState<string | null>(null),
     [error, setError] = useState<string | null>(null),
     gateways = [
+      "https://coral-permanent-catshark-777.mypinata.cloud/ipfs/",
+      "https://coral-permanent-catshark-777.mypinata.cloud/ipfs/",
       "https://cloudflare-ipfs.com/ipfs/",
       "https://gateway.pinata.cloud/ipfs/",
       "https://ipfs.io/ipfs/",
