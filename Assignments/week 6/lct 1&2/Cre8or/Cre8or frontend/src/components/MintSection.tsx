@@ -24,15 +24,14 @@ const MintSection = () => {
           Upload your artwork and mint it as an NFT on the blockchain
         </div>
       </div>
-      <div className="flex items-center text-left space-x-9 ">
-        {/* upload image */}
-
+      {/* upload image */}
+      <div className="flex flex-col md:flex-row justify-center  text-left space-x-9 space-y-9 ">
         <Upload
           setUploaded={setUploaded}
           reset={reset}
           uploaded={uploaded as boolean}
         />
-        {/*add info */}
+        {/*add metadata */}
         <div className="flex space-y-10 flex-col w-full">
           <input
             type="text"

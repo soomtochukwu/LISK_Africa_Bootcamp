@@ -1,4 +1,3 @@
-import React from "react";
 import { CiMoneyBill } from "react-icons/ci";
 import { accentColor } from "../../utils/vars";
 

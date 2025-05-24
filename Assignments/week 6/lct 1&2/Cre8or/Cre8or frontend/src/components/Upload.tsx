@@ -44,7 +44,7 @@ const Upload = ({ reset, uploaded, setUploaded }: UploadProps) => {
         previewImage(e.dataTransfer.files[0]);
       }}
       className={
-        "  flex flex-col w-80 cursor-pointer justify-between space-y-2 "
+        "  flex active:scale-95 w-full md:w-96  cursor-pointer justify-between space-y-2 "
       }
     >
       <input
