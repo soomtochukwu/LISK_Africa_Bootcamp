@@ -25,23 +25,30 @@ To the best of my knowledge, and based on my careful reading of the Week 6: Fron
 
 In cases where the tutor did not provide explicit specifications, I made the following implementation decisions to ensure completeness and clarity:
 
-### 1. 🖼️ Event Naming
+### 1. 🖼️ Project Name
+
+- **Event Name**: `newArt`  
+  **Reason**: I decided to call this Assignment Cre8or - It sounds cool. The tutor also did not say anything about it.
+
+
+
+### 2. 🖼️ Event Naming
 
 - **Event Name**: `newArt`  
   **Reason**: The tutor did not specify a name for the event emitted when a new NFT is minted. I chose `newArt` for its clarity and relevance to the action.
 
-### 2. 🎁 Creator Token Rewards
+### 3. 🎁 Creator Token Rewards
 
 - **Reward Amount**: 26 `CT_AN`  
   **Reason**: Since the reward quantity was unspecified, I chose 26 to reflect the assignment's due date (26th of the month).
 
-### 3. 🪙 Token Symbol Naming
+### 4. 🪙 Token Symbol Naming
 
 - **NFT Symbol**: `AN` (ArtNFT)
 - **ERC20 Symbol**: `CT_AN` (Creator Token for ArtNFT)  
   **Reason**: No specific symbols were given, so I selected intuitive and relevant identifiers for clarity and context.
 
-### 4. 🛠️ Additional Custom Functions
+### 5. 🛠️ Additional Custom Functions
 
 - **Function Added**: `getAllMetadata()`  
   **Purpose**: Retrieves metadata for all minted NFTs and assists in fulfilling the deliverables effectively.
