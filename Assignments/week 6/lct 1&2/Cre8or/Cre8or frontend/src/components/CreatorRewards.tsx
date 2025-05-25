@@ -14,12 +14,19 @@ const //
   CreatorRewards = () => {
     const //
       // [tokenId, setTokenId] = useState(""),
-      totalNFT = useReadContract({
-        address: ArtNFTAddress,
-        abi: ArtNFTAbi,
-        functionName: "getAllMetadata",
-        args: [],
-      }).data,
+      totalNFT =
+        (
+          useReadContract({
+            address: ArtNFTAddress,
+            abi: ArtNFTAbi,
+            functionName: "getAllMetadata",
+            args: [],
+          }).data as
+            | { uri: string; creator: `0x${string}`; tokenId: bigint }[]
+            | undefined
+        )
+          ?.slice()
+          .reverse() || [],
       chainId = useChainId(),
       { chains } = useConfig(),
       currentChain = chains.find((c) => c.id === chainId);

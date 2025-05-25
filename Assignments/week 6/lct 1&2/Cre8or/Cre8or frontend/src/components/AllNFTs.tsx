@@ -18,7 +18,7 @@ const AllNFTs = () => {
       functionName: "getAllMetadata",
       args: [],
     }),
-    totalNFT = data;
+    totalNFT = (Array.isArray(data) ? [...data] : []).reverse();
 
   useWatchContractEvent({
     address: ArtNFTAddress,
@@ -46,16 +46,26 @@ const AllNFTs = () => {
       </div>
       {/* gallery */}
       <div className="space-x-7 space-y-10 flex items-center justify-center flex-wrap">
-        {totalNFT?.map(({ creator, tokenId, uri }) => {
-          return (
-            <Card
-              key={Math.random()}
-              id={Number(tokenId)}
-              creator={creator}
-              metadataCid={uri}
-            />
-          );
-        })}
+        {totalNFT.map(
+          ({
+            creator,
+            tokenId,
+            uri,
+          }: {
+            creator: `0x${string}`;
+            tokenId: bigint;
+            uri: string;
+          }) => {
+            return (
+              <Card
+                key={String(tokenId)}
+                id={Number(tokenId)}
+                creator={creator}
+                metadataCid={uri}
+              />
+            );
+          }
+        )}
       </div>
     </div>
   );
