@@ -27,7 +27,7 @@ In cases where the tutor did not provide explicit specifications, I made the fol
 
 ### 1. 🖼️ Project Name
 
-- **Event Name**:   
+- **Cre8or**:   
   **Reason**: I decided to call this Assignment `Cre8or` - It sounds cool. The tutor also did not say anything about it.
 
 
