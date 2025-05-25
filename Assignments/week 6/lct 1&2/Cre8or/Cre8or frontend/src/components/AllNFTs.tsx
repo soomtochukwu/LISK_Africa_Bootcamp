@@ -7,16 +7,29 @@ import {
   ArtNFTAbi,
 } from "../../utils/vars";
 import Card from "./Card";
-import { useReadContract } from "wagmi";
+import { useReadContract, useWatchContractEvent } from "wagmi";
 // import { title } from "process";
 
 const AllNFTs = () => {
-  const totalNFT = useReadContract({
+  const //
+    { data, refetch } = useReadContract({
+      address: ArtNFTAddress,
+      abi: ArtNFTAbi,
+      functionName: "getAllMetadata",
+      args: [],
+    }),
+    totalNFT = data;
+
+  useWatchContractEvent({
     address: ArtNFTAddress,
     abi: ArtNFTAbi,
-    functionName: "getAllMetadata",
-    args: [],
-  }).data;
+    eventName: "newArt",
+    onLogs: (logs) => {
+      console.log("New NFT minted:", logs);
+      refetch();
+    },
+  });
+
   return (
     <div className=" w-full space-y-4">
       {/* intro */}
@@ -32,7 +45,7 @@ const AllNFTs = () => {
         </div>
       </div>
       {/* gallery */}
-      <div className="space-x-7 space-y-7 flex items-center justify-center flex-wrap">
+      <div className="space-x-7 space-y-10 flex items-center justify-center flex-wrap">
         {totalNFT?.map(({ creator, tokenId, uri }) => {
           return (
             <Card
@@ -43,8 +56,6 @@ const AllNFTs = () => {
             />
           );
         })}
-
-        {}
       </div>
     </div>
   );

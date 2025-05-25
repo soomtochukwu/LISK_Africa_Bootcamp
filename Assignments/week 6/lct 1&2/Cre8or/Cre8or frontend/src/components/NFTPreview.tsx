@@ -17,8 +17,6 @@ const NFTPreview = ({
     [imageUrl, setImageUrl] = useState<string | null>(null),
     [error, setError] = useState<string | null>(null),
     gateways = [
-      "https://coral-permanent-catshark-777.mypinata.cloud/ipfs/",
-      "https://coral-permanent-catshark-777.mypinata.cloud/ipfs/",
       "https://cloudflare-ipfs.com/ipfs/",
       "https://gateway.pinata.cloud/ipfs/",
       "https://ipfs.io/ipfs/",
@@ -37,7 +35,8 @@ const NFTPreview = ({
         // Intentionally ignore errors and try next gateway
       }
     }
-    throw new Error("All gateways failed");
+    throw new Error(`All gateways failed
+Try a using VPN`);
   };
 
   useEffect(() => {
@@ -75,15 +74,16 @@ const NFTPreview = ({
     fetchImageFromMetadata();
   }, [metadataCid]);
 
-  if (error) return <p className="text-red-500">⚠️ {error}</p>;
-  if (!imageUrl) return <p>Loading image...</p>;
+  if (error) return <pre className="text-red-500">⚠️ {error}</pre>;
+  if (!imageUrl)
+    return <p className="p-6 animate-spin border-r-2 rounded-full "></p>;
 
   return (
     <img
       key={metadataCid}
       src={imageUrl}
       alt={alt}
-      className="hover:brightness-125 h-full brightness-75"
+      className="hover:brightness-125 max-h-full rounded-xl brightness-75"
     />
   );
 };

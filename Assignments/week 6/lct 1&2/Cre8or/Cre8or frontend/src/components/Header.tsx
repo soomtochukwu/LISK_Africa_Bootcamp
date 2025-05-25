@@ -33,7 +33,7 @@ const Header = () => {
       <div className=" bg-[#0065a0] rounded-xl flex scale-75 md:scale-100 items-center space-x-2 p-1">
         {isConnected ? (
           <span
-            className="font-bold text-xl font-mono"
+            className="font-bold text-xl text-white font-mono"
             title="Your Cre8or Rewards Balance"
           >
             {balance ? balance : 0} {symbol}{" "}

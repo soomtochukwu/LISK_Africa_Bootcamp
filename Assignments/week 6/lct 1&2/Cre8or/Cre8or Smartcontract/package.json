@@ -1,5 +1,9 @@
 {
-  "name": "hardhat-project",
+  "name": "cre8or-smart-contracts",
+  "scripts": {
+    "dl": "npx hardhat run scripts/deploy.js --network localhost",
+    "dt": "npx hardhat run scripts/deploy.js --network lisk-sepolia"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.24.0"

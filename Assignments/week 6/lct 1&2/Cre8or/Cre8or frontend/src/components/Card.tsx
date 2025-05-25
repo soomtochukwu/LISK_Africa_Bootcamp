@@ -84,15 +84,14 @@ const Card = ({ creator, id, metadataCid }: CardProps) => {
   return (
     <div
       key={Math.random()}
-      className="w-72 shadow-2xl rounded-2xl hover:shadow shadow-gray-900 hover:scale-110"
+      className="w-72 flex items-center flex-col shadow hover:shadow-[4px_6px_25px_0] rounded-2xl shadow-gray-900 hover:scale-110"
     >
-      <div>{currentChain?.blockExplorers?.default.url}</div>
       {/* nft display */}
-      <div className="w-fit h-80 flex items-center">
+      <div className="w-fit h-80 flex rounded-2xl items-center">
         <NFTPreview metadataCid={metadataCid} />
       </div>
       {/* metadata */}
-      <div className="p-4 space-y-3">
+      <div className="p-4 w-full space-y-3">
         <div className="flex w-full justify-between">
           {/* heading*/}
           <span className="font-bold">{title}</span>

@@ -110,7 +110,7 @@ const MintSection = () => {
               setName(e.currentTarget.value);
             }}
             type="text"
-            className={`p-3 border rounded-lg outline-0 outline-[#0000] focus:outline-2 focus:outline-[${accentColor}]`}
+            className={`p-3 border rounded-lg outline-0 outline-[#0000] focus:outline-2 focus:outline-[#0065a0]`}
             placeholder="Give your NFT a name"
           />
 
@@ -121,7 +121,7 @@ const MintSection = () => {
             placeholder="Describe your NFT (optional)"
             className={
               "p-3 border rounded-lg outline-0 outline-[#0000] focus:outline-2 " +
-              `focus:outline-[${accentColor}]`
+              `focus:outline-[#0065a0]`
             }
             rows={5}
           ></textarea>
