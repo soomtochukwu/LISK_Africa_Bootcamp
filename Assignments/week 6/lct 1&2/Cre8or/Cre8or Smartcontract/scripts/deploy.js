@@ -2,8 +2,6 @@ const hre = require("hardhat");
 const { verify } = require("../utils/verify.js");
 require("dotenv").config();
 
-const initialOwner = "0x8a371e00cd51e2be005b86ef73c5ee9ef6d23feb";
-
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
 
@@ -11,6 +9,7 @@ async function main() {
   const ArtNFT = await hre.ethers.deployContract("ArtNFT", [deployer.address]);
   await ArtNFT.waitForDeployment();
   console.log("ArtNFT Contract Deployed at " + ArtNFT.target);
+  console.log("");
 
   // Deploy CreatorToken
   const CreatorToken = await hre.ethers.deployContract("CreatorToken", [
@@ -24,15 +23,20 @@ async function main() {
 
   if (network.name !== "hardhat" && network.name !== "localhost") {
     console.log("Verifying contracts...");
-    await verify(ArtNFT.target, [initialOwner], "contracts/ArtNFT.sol:ArtNFT");
+    await verify(
+      ArtNFT.target,
+      [deployer.address],
+      "contracts/ArtNFT.sol:ArtNFT"
+    );
     await verify(
       CreatorToken.target,
-      [initialOwner, ArtNFT.target],
+      [deployer.address, ArtNFT.target],
       "contracts/CreatorToken.sol:CreatorToken"
     );
   } else {
     console.log("Skipping verification on local network");
   }
+  console.log("");
 
   // Get ArtNFT contract instance connected with deployer signer
   const artNFT = await hre.ethers.getContractAt(
