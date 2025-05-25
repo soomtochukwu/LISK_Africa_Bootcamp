@@ -8,7 +8,7 @@ import {
   dim,
 } from "../../utils/vars";
 import Upload from "./Upload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PinataSDK } from "pinata";
 import { useWriteContract } from "wagmi";
 
@@ -17,8 +17,10 @@ const MintSection = () => {
     [uploaded, setUploaded] = useState<boolean>(),
     [image, setImage] = useState<File>(),
     [name, setName] = useState(""),
+    [txn, setTxn] = useState(""),
+    [minted, setMinted] = useState<boolean>(),
     [description, setDescription] = useState(""),
-    { writeContract } = useWriteContract(),
+    { writeContractAsync } = useWriteContract(),
     pinata = new PinataSDK({
       pinataJwt: import.meta.env.VITE_JWT,
       pinataGateway: import.meta.env.VITE_GATE,
@@ -26,6 +28,7 @@ const MintSection = () => {
     reset = () => {
       //   setImgSrc("");
       setUploaded(false);
+      setMinted(false);
       //   setFile(undefined);
       //   setBgDrag("");
     },
@@ -70,18 +73,25 @@ const MintSection = () => {
       // logic to minth nft
       try {
         const //
-          ipfsHash = await pinFiles(),
-          tx = await writeContract({
-            abi: ArtNFTAbi,
-            address: ArtNFTAddress,
-            functionName: "safeMint",
-            args: [String(ipfsHash)],
-          });
-        console.log(tx);
+          ipfsHash = await pinFiles();
+        writeContractAsync({
+          abi: ArtNFTAbi,
+          address: ArtNFTAddress,
+          functionName: "safeMint",
+          args: [String(ipfsHash)],
+        }).then((res) => {
+          console.log("NFT Minted Successfully", res);
+          setTxn(res);
+          setMinted(true);
+        });
       } catch (error) {
         console.log(error);
       }
     };
+
+  useEffect(() => {
+    console.log(ArtNFTAddress);
+  }, []);
 
   return (
     <div className="w-3/4 space-y-8 p-6">
@@ -127,11 +137,27 @@ const MintSection = () => {
           ></textarea>
         </div>
       </div>
-      <div className="flex justify-between">
-        <button onClick={reset}>Reset</button>
-        <button onClick={handleMint} className="bg-[accentColor]">
-          Mint NFT
-        </button>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <button onClick={reset}>Reset</button>
+
+          <button onClick={handleMint} className="bg-[accentColor]">
+            Mint NFT
+          </button>
+        </div>
+        {minted ? (
+          <div className="text-green-500">
+            NFT Minted Successfully at!{" "}
+            <a
+              className="text-blue-500"
+              href={`https://sepolia-blockscout.lisk.com/tx/${txn}`}
+            >
+              {txn.slice(0, 20)}...
+            </a>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

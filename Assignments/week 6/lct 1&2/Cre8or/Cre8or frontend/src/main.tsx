@@ -14,3 +14,11 @@ createRoot(document.getElementById("root") as HTMLElement).render(
     </BrowserRouter>
   </StrictMode>
 );
+
+/* 
+export const ArtNFTAddress =
+  "0x43c73E1a22130737a0bA4B8e0825Be3347F565Df" as const;
+export const CreatorTokenAddress =
+  "0x6a5264A88a46412771119c49137A18aAcCf2EA76" as const;
+
+*/
