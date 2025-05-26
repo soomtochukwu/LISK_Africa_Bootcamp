@@ -78,7 +78,7 @@ const MintSection = () => {
           abi: ArtNFTAbi,
           address: ArtNFTAddress,
           functionName: "safeMint",
-          args: [String(ipfsHash)],
+          args: ["ipfs://" + String(ipfsHash)],
         }).then((res) => {
           console.log("NFT Minted Successfully", res);
           setTxn(res);
