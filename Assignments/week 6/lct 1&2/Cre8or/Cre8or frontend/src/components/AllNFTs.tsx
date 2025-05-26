@@ -24,9 +24,9 @@ const AllNFTs = () => {
     address: ArtNFTAddress,
     abi: ArtNFTAbi,
     eventName: "newArt",
-    onLogs: (logs) => {
+    onLogs: async (logs) => {
+      await refetch();
       console.log("New NFT minted:", logs);
-      refetch();
     },
   });
 

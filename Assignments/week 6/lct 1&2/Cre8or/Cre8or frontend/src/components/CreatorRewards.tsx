@@ -1,4 +1,3 @@
-import { Link } from "lucide-react";
 import {
   ArtNFTAbi,
   ArtNFTAddress,
@@ -7,29 +6,38 @@ import {
   dim,
 } from "../../utils/vars";
 import Money from "./Money";
-import { useConfig, useChainId, useReadContract } from "wagmi";
+import {
+  useConfig,
+  useChainId,
+  useReadContract,
+  useWatchContractEvent,
+} from "wagmi";
 import NFTPreview from "./NFTPreview";
 
 const //
   CreatorRewards = () => {
     const //
       // [tokenId, setTokenId] = useState(""),
-      totalNFT =
-        (
-          useReadContract({
-            address: ArtNFTAddress,
-            abi: ArtNFTAbi,
-            functionName: "getAllMetadata",
-            args: [],
-          }).data as
-            | { uri: string; creator: `0x${string}`; tokenId: bigint }[]
-            | undefined
-        )
-          ?.slice()
-          .reverse() || [],
       chainId = useChainId(),
       { chains } = useConfig(),
-      currentChain = chains.find((c) => c.id === chainId);
+      currentChain = chains.find((c) => c.id === chainId),
+      { data, refetch } = useReadContract({
+        address: ArtNFTAddress,
+        abi: ArtNFTAbi,
+        functionName: "getAllMetadata",
+        args: [],
+      }),
+      totalNFT = (Array.isArray(data) ? [...data] : []).reverse();
+
+    useWatchContractEvent({
+      address: ArtNFTAddress,
+      abi: ArtNFTAbi,
+      eventName: "newArt",
+      onLogs: async (logs) => {
+        await refetch();
+        console.log("New NFT minted:", logs);
+      },
+    });
 
     return (
       <div className="w-full p-4 text-sm space-y-10">
@@ -51,7 +59,6 @@ const //
                 <td>NFT Image</td>
                 <td>Creator Address</td>
                 <td>Reward Amount</td>
-                <td>Transaction Hash</td>
               </tr>
             </thead>
             <tbody>
@@ -81,17 +88,6 @@ const //
                     </td>
                     <td className=" flex text-2xl items-center font-bold -top-8 relative">
                       <Money /> <CreatorRewardsBalance creator={creator} />
-                    </td>
-                    <td>
-                      <a href="#" className="flex items-center space-x-1">
-                        <Link className={`${dim}`} size={15} />
-                        <span>
-                          {"wedewcbywqbxyunwqziqw8wedewcbywqbxyunwqziqw8".slice(
-                            35
-                          )}
-                          ...
-                        </span>
-                      </a>
                     </td>
                   </tr>
                 );

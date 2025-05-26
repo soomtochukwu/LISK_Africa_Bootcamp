@@ -2,11 +2,11 @@ export const accentColor: string = "#0065a0" as const;
 export const dim = "text-gray-500 dark:text-gray-400" as const;
 export const ArtNFTAddress =
   import.meta.env.VITE_DEV == "true"
-    ? "0xED8CAB8a931A4C0489ad3E3FB5BdEA84f74fD23E"
+    ? "0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f"
     : "0x43c73E1a22130737a0bA4B8e0825Be3347F565Df";
 export const CreatorTokenAddress =
   import.meta.env.VITE_DEV == "true"
-    ? "0x40bde52e6B80Ae11F34C58c14E1E7fE1f9c834C4"
+    ? "0xB581C9264f59BF0289fA76D61B2D0746dCE3C30D"
     : "0x6a5264A88a46412771119c49137A18aAcCf2EA76";
 
 export const ArtNFTAbi = [

@@ -1,26 +1,39 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { FaWallet } from "react-icons/fa";
-import { useAccount, useReadContract } from "wagmi";
-import { CreatorTokenAddress, CreatorTokenAbi } from "../../utils/vars";
+import { useAccount, useReadContract, useWatchContractEvent } from "wagmi";
+import {
+  CreatorTokenAddress,
+  CreatorTokenAbi,
+  ArtNFTAddress,
+  ArtNFTAbi,
+} from "../../utils/vars";
 
 const Header = () => {
   const //
     { isConnected, address } = useAccount(),
-    balance =
-      Number(
-        useReadContract({
-          abi: CreatorTokenAbi,
-          address: CreatorTokenAddress,
-          functionName: "balanceOf",
-          args: [address as `0x${string}`],
-        }).data
-      ) / 1e18,
+    { data, refetch } = useReadContract({
+      abi: CreatorTokenAbi,
+      address: CreatorTokenAddress,
+      functionName: "balanceOf",
+      args: [address as `0x${string}`],
+    }),
+    balance = Number(data) / 1e18,
     symbol = useReadContract({
       abi: CreatorTokenAbi,
       address: CreatorTokenAddress,
       functionName: "symbol",
       args: [],
     }).data;
+
+  useWatchContractEvent({
+    address: ArtNFTAddress,
+    abi: ArtNFTAbi,
+    eventName: "newArt",
+    onLogs: async (logs) => {
+      await refetch();
+      console.log("More rewards:", logs);
+    },
+  });
 
   return (
     <div className="flex fixed top-0 z-40 backdrop-blur-2xl w-full justify-between items-center p-4 shadow-md">
