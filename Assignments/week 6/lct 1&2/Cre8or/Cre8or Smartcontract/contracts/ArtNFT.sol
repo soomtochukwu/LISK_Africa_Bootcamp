@@ -10,6 +10,7 @@ interface ICreatorToken {
     function rewardCreator(address to, uint256 amount) external;
 }
 
+//
 contract ArtNFT is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
     address private _creatorToken;
