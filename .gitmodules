@@ -7,3 +7,7 @@
 [submodule "Assignments/week 7/lct1/part2/LiskAfrica-zksync-Streaming-platform"]
 	path = Assignments/week 7/lct1/part2/LiskAfrica-zksync-Streaming-platform
 	url = https://github.com/soomtochukwu/LiskAfrica-zksync-Streaming-platform.git
+
+[submodule "/home/maziofweb3/cds/ps/LISK_Africa_Bootcamp/Final Project/Cr8or"]
+	path = /home/maziofweb3/cds/ps/LISK_Africa_Bootcamp/Final Project/Cr8or
+	url = https://github.com/Team-3-Lisk-Africa-Bootcamp/Cr8or.git
