@@ -11,3 +11,7 @@
 [submodule "Final Project/Cr8or"]
 	path = Final Project/Cr8or
 	url = https://github.com/Team-3-Lisk-Africa-Bootcamp/Cr8or.git
+
+[submodule "Final Project/Cr8or-Smartcontracts"]
+	path = Final Project/Cr8or-Smartcontracts
+	url = https://github.com/Team-3-Lisk-Africa-Bootcamp/Cr8or-Smartcontracts.git
