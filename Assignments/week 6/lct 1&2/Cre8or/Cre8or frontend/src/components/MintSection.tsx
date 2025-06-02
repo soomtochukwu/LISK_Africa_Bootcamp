@@ -50,6 +50,16 @@ const MintSection = () => {
         })(),
         // construct metadata
         metadata = {
+          attributes: [
+            {
+              trait_type: "Name",
+              value: name,
+            },
+            {
+              trait_type: "Description",
+              value: description,
+            },
+          ],
           name: name,
           description: description,
           image: `ipfs://${pinnedImage.cid}`,
