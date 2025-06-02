@@ -34,7 +34,7 @@ contract ArtNFT is ERC721, ERC721URIStorage, Ownable {
         _creatorToken = creatorToken_;
     }
 
-    function safeMint(string memory uri) public onlyOwner returns (uint256) {
+    function safeMint(string memory uri) public returns (uint256) {
         uint256 tokenId = _nextTokenId++;
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
