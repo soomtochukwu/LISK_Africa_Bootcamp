@@ -2,8 +2,8 @@
 
 ## Smart Contract(s)
 
-- [**ArtNFT** NFT contract](https://sepolia-blockscout.lisk.com/token/0x43c73E1a22130737a0bA4B8e0825Be3347F565Df?tab=contract)
-- [**CreatorRewad** token contract](https://sepolia-blockscout.lisk.com/token/0x6a5264A88a46412771119c49137A18aAcCf2EA76?tab=contract)
+- [**ArtNFT** NFT contract](https://sepolia-blockscout.lisk.com/token/0x795939176C15C3c279A077960753d4e24bFC8EEa?tab=contract)
+- [**CreatorRewad** token contract](https://sepolia-blockscout.lisk.com/token/0x69B2Ee0F323739320ac6dC377aDA750d15F95cD3?tab=contract)
 
 ## Frontend App
 
@@ -27,10 +27,8 @@ In cases where the tutor did not provide explicit specifications, I made the fol
 
 ### 1. 🖼️ Project Name
 
-- **Cre8or**:   
+- **Cre8or**:  
   **Reason**: I decided to call this Assignment `Cre8or` - It sounds cool. The tutor also did not say anything about it.
-
-
 
 ### 2. 🖼️ Event Naming
 
