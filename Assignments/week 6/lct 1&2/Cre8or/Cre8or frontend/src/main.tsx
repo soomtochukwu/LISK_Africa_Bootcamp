@@ -17,8 +17,8 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 
 /* 
 export const ArtNFTAddress =
-  "0x43c73E1a22130737a0bA4B8e0825Be3347F565Df" as const;
+  "0x795939176C15C3c279A077960753d4e24bFC8EEa" as const;
 export const CreatorTokenAddress =
-  "0x6a5264A88a46412771119c49137A18aAcCf2EA76" as const;
+  "0x69B2Ee0F323739320ac6dC377aDA750d15F95cD3" as const;
 
 */
